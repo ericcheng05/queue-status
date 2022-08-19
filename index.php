@@ -20,7 +20,10 @@
 		$storeQueue = curl_exec($channel);
 		$array_StoreQueue = json_decode($storeQueue);
 		curl_close($channel);
-		$array_Calling = $array_StoreQueue->mixedQueue;	
+		$array_Calling = $array_StoreQueue->mixedQueue;
+		echo $value->name;
+		echo $value->waitingGroup;
+		echo count($array_Calling);
 	}
 ?>
 
