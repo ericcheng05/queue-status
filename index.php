@@ -18,7 +18,7 @@
 		curl_setopt($channel, CURLOPT_URL,$sushiroQueuePath.$value->id);
 		// Execute
 		$storeQueue = curl_exec($channel);
-		array_push(allStoreQueueStatus,$value->name,$value->waitingGroup,json_decode($storeQueue));
+		array_push($allStoreQueueStatus,$value->name,$value->waitingGroup,json_decode($storeQueue));
 		curl_close($channel);
 	}
 ?>
