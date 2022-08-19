@@ -10,20 +10,15 @@
 	curl_close($channel);
 
 	$decodedStoreList = json_decode($storeList);
-	$storeCount = count($decodedStoreList);
-
-	for ($x = 0; $x < $storeCount; $x++)
+	$allStoreQueueStatus = array();
+	foreach ($decodedStoreList as $value) 
 	{
-		echo $decodedStoreList[$x]->name;
-		echo " Current Queue Size: ".$decodedStoreList[$x]->waitingGroup;
-
 		$channel = curl_init();
 		curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($channel, CURLOPT_URL,$sushiroQueuePath.$decodedStoreList[$x]->id);
+		curl_setopt($channel, CURLOPT_URL,$sushiroQueuePath.$value->id);
 		// Execute
 		$storeQueue = curl_exec($channel);
-		$decodedStoreQueue = json_decode($storeQueue);
-		echo "Next Ticket: ".$decodedStoreQueue->mixedQueue[0], PHP_EOL;
+		array_push(storeQueueStatus,$value->name,$value->waitingGroup,json_decode($storeQueue));
 		curl_close($channel);
 	}
 ?>
@@ -43,11 +38,11 @@
 				<th>Next 3rd Ticket</th>
   			</tr>
 			<?php
-				foreach ($decodedStoreList as $value) 
+				foreach ($allStoreQueueStatus as $value) 
 				{
 					echo "<tr>", PHP_EOL;
-					echo "<td>$value->name</td>", PHP_EOL;
-					echo "<td>$value->waitingGroup</td>", PHP_EOL;
+					echo "<td>$value[0]</td>", PHP_EOL;
+					echo "<td>$value[1]</td>", PHP_EOL;
 					echo "<td>0</td>", PHP_EOL;
 					echo "<td>1</td>", PHP_EOL;
 					echo "<td>2</td>", PHP_EOL;
