@@ -45,13 +45,13 @@
 			<?php
 				foreach ($decodedStoreList as $value) 
 				{
-					echo "<tr>";
-					echo "<td>$value->name</td>";
-					echo "<td>$value->waitingGroup</td>";
-					echo "<td>0</td>";
-					echo "<td>1</td>";
-					echo "<td>2</td>";
-					echo "</tr>";
+					echo "<tr>", PHP_EOL;
+					echo "<td>$value->name</td>", PHP_EOL;
+					echo "<td>$value->waitingGroup</td>", PHP_EOL;
+					echo "<td>0</td>", PHP_EOL;
+					echo "<td>1</td>", PHP_EOL;
+					echo "<td>2</td>", PHP_EOL;
+					echo "</tr>", PHP_EOL;
 				}
 			?>
 		</table>
