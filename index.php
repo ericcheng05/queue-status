@@ -22,7 +22,7 @@
 		curl_close($channel);
 		echo $value->name, PHP_EOL;
 		echo $value->waitingGroup, PHP_EOL;		
-		array_push($allStoreQueueStatus,$value->name,$value->waitingGroup);		
+		// array_push($allStoreQueueStatus,$value->name,$value->waitingGroup);		
 	}
 ?>
 
