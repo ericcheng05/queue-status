@@ -9,15 +9,17 @@
 	$storeList = curl_exec($channel);
 	curl_close($channel);
 
-	$decodedStoreList = json_decode($storeList);
-	$allStoreQueueStatus = array();
-	foreach ($decodedStoreList as $value) 
+	$array_StoreList = json_decode($storeList);
+	$array_allStoreQueueStatus = array();
+	foreach ($array_StoreList as $value) 
 	{
 		$channel = curl_init();
 		curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($channel, CURLOPT_URL,$sushiroQueuePath.$value->id);
 		// Execute
 		$storeQueue = curl_exec($channel);
+		echo $value->name, PHP_EOL;
+		echo $value->waitingGroup, PHP_EOL;
 		array_push($allStoreQueueStatus,$value->name,$value->waitingGroup,json_decode($storeQueue));
 		curl_close($channel);
 	}
