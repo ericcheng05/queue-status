@@ -10,7 +10,7 @@
 	curl_close($channel);
 
 	$array_StoreList = json_decode($storeList);
-	$array_allStoreQueueStatus = array();
+	// $array_allStoreQueueStatus = array();
 	foreach ($array_StoreList as $value) 
 	{
 		$channel = curl_init();
@@ -20,7 +20,11 @@
 		$storeQueue = curl_exec($channel);
 		$array_StoreQueue = json_decode($storeQueue);
 		curl_close($channel);
-		array_push($allStoreQueueStatus,array("name"=>$value->name,"queuesize"=>$value->waitingGroup,"ticketqueue"=>$array_StoreQueue->mixedQueue));		
+		echo "$value->name", PHP_EOL;
+		echo "$value->waitingGroup", PHP_EOL;
+		echo "$array_StoreQueue->mixedQueue[0]", PHP_EOL;
+		echo "$array_StoreQueue->mixedQueue[1]", PHP_EOL;
+		echo "$array_StoreQueue->mixedQueue[2]", PHP_EOL;
 	}
 ?>
 
