@@ -13,20 +13,26 @@
 			curl_setopt($channel, CURLOPT_URL,$sushiroStoreList);
 			// Execute
 			$storeList = curl_exec($channel);
-			curl_close($ch);
+			curl_close($channel);
 
 			$decodedStoreList = json_decode($storeList);
 			$storeCount = count($decodedStoreList);
 			echo "breakpoint";
 			for ($x = 0; $x < $storeCount; $x++)
 			{
-					echo $decodedStoreList[$x]->name;
-					echo " Current Queue Size: ".$decodedStoreList[$x]->waitingGroup;
-    
-					$StoreQueue = file_get_contents($sushiroQueuePath.$decodedStoreList[$x]->id);
-					$decodedStoreQueue = json_decode($StoreQueue);
-					echo "Next Ticket: ".$decodedStoreQueue->mixedQueue[0], PHP_EOL;;
-  		}
+				echo $decodedStoreList[$x]->name;
+				echo " Current Queue Size: ".$decodedStoreList[$x]->waitingGroup;
+    				
+				$channel = curl_init();
+				curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($channel, CURLOPT_URL,$sushiroQueuePath.$decodedStoreList[$x]->id);
+				// Execute
+				$storeQueue = curl_exec($channel);
+				$decodedStoreQueue = json_decode($storeQueue);
+				echo "Next Ticket: ".$decodedStoreQueue->mixedQueue[0], PHP_EOL;
+				curl_close($channel);
+			}
+		
 	?>
   </body>
 </html>
