@@ -20,9 +20,7 @@
 		$storeQueue = curl_exec($channel);
 		$array_StoreQueue = json_decode($storeQueue);
 		curl_close($channel);
-		$array_Calling = $array_StoreQueue->mixedQueue;
-		$array_StoreInfo = array("name"=>"$value->name", "queuesize"=>"$value->waitingGroup", "ticket"=>array_calling);
-		echo "$array_StoreInfo->name";
+		$array_Calling = $array_StoreQueue->mixedQueue;	
 	}
 ?>
 
