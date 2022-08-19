@@ -20,7 +20,7 @@
 		$storeQueue = curl_exec($channel);
 		$array_StoreQueue = json_decode($storeQueue);
 		curl_close($channel);
-		array_push($allStoreQueueStatus,"name"=>$value->name,"queuesize"=>$value->waitingGroup,"ticketqueue"=>$array_StoreQueue->mixedQueue);		
+		array_push($allStoreQueueStatus,array("name"=>$value->name,"queuesize"=>$value->waitingGroup,"ticketqueue"=>$array_StoreQueue->mixedQueue));		
 	}
 ?>
 
