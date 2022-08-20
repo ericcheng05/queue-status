@@ -75,7 +75,13 @@
 				//Close the multi handle.
 				curl_multi_close($mh);
 				//var_dump the $requests array for example purposes.
-				var_dump($storeRequests);
+				
+				foreach($storeRequests as $value)
+				{
+					$array_StoreQueue = json_decode(value['content']);
+					$counter = count($array_StoreQueue->mixedQueue);
+				}
+				
 			
 			
 			/*
