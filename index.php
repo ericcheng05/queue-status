@@ -40,32 +40,48 @@
 					echo "<tr>", PHP_EOL;
 					echo "<td>$value->name</td>", PHP_EOL;
 					echo "<td>$value->waitingGroup</td>", PHP_EOL;
-					echo "<td>$value->netTicketStatus</td>", PHP_EOL;
+					
+					
+					if ($value->counterReservationsAllowed)
+					{
+						echo "<td>暫停派籌</td>", PHP_EOL;
+					}
+					else
+					{
+						echo "<td>派籌中</td>", PHP_EOL;
+					}
+					
+					
 					
 					$counter = count($array_StoreQueue->mixedQueue);
-					echo ($array_StoreQueue->mixedQueue)[0];
-					switch ($counter)
+					if ($counter > 0)
 					{
-						case 3:
-							echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-							echo "<td>$array_StoreQueue->mixedQueue[1]</td>", PHP_EOL;
-							echo "<td>$array_StoreQueue->mixedQueue[2]</td>", PHP_EOL;
-							break;
-						case 2:
-							echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-							echo "<td>$array_StoreQueue->mixedQueue[1]</td>", PHP_EOL;
-							echo "<td>NA</td>", PHP_EOL;
-							break;
-						case 1:
-							echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-							echo "<td>NA</td>", PHP_EOL;
-							echo "<td>NA</td>", PHP_EOL;
-							break;
-						default:
-							echo "<td>NA</td>", PHP_EOL;
-							echo "<td>NA</td>", PHP_EOL;
-							echo "<td>NA</td>", PHP_EOL;
+						$firstTicket = ($array_StoreQueue->mixedQueue)[0];
+						echo "<td>$firstTicket</td>", PHP_EOL;						
 					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					if ($counter > 1)
+					{
+						$secondTicket = ($array_StoreQueue->mixedQueue)[1];
+						echo "<td>$secondTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					if ($counter > 2)
+					{
+						$thirdTicket = ($array_StoreQueue->mixedQueue)[2];
+						echo "<td>$thirdTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					
 					echo "</tr>", PHP_EOL;					
 				}
 			?>
