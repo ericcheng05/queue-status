@@ -7,9 +7,9 @@
 	<body>
 		<h1>Sushiro籌號</h1>
 		<?php
-			date_default_timezone_set('Asia/Hong Kong');
-			$date = date('H:i');
-			echo "<h2>Update Time:	$date</h2>", PHP_EOL;
+			$dt = new DateTime("now", new DateTimeZone('Asia/Hong Kong'));
+			$dt->format("Y-m-d H:i");	
+			echo "<h2>Update Time:	$dt</h2>", PHP_EOL;
 		?>
 					
 		<table class="container">
