@@ -5,6 +5,13 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
+		<h1>Sushiro籌號</h1>
+		<?php
+			date_default_timezone_set('Asia/Hong Kong');
+			$date = date('H:i');
+			echo "<h2>Update Time:	$date</h2>", PHP_EOL;
+		?>
+					
 		<table class="container">
 			<tr>
 				<th>店鋪</th>
