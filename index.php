@@ -80,7 +80,51 @@
 				foreach($storeRequests as $k => $request)
 				{
 					$array_StoreQueue = json_decode($storeRequests[$k]['content']);
-					echo ($array_StoreQueue->mixedQueue)[0], PHP_EOL;
+					echo "<tr>", PHP_EOL;
+					echo "<td>$array_StoreList[$k]['name']</td>", PHP_EOL;
+					echo "<td>$array_StoreList[$k]['waitingGroup']</td>", PHP_EOL;
+					
+					
+					if ($value->counterReservationsAllowed)
+					{
+						echo "<td>暫停派籌</td>", PHP_EOL;
+					}
+					else
+					{
+						echo "<td>派籌中</td>", PHP_EOL;
+					}
+					
+					$counter = count($array_StoreQueue->mixedQueue);
+					if ($counter > 0)
+					{
+						$firstTicket = ($array_StoreQueue->mixedQueue)[0];
+						echo "<td>$firstTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					if ($counter > 1)
+					{
+						$secondTicket = ($array_StoreQueue->mixedQueue)[1];
+						echo "<td>$secondTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					if ($counter > 2)
+					{
+						$thirdTicket = ($array_StoreQueue->mixedQueue)[2];
+						echo "<td>$thirdTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					
+					echo "</tr>", PHP_EOL;	
+
 				}
 				
 			
