@@ -31,6 +31,7 @@
 	<head>
 		<title>Sushiro HK Store Queue Status</title>
 		<meta http-equiv="refresh" content="120">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
 		<table>
