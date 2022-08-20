@@ -7,11 +7,12 @@
 	<body>
 		<table class="container">
 			<tr>
-				<th>Store</th>
-				<th>Current Queue Size</th>
-				<th>Next 1st Ticket</th>
-				<th>Next 2nd Ticket</th>
-				<th>Next 3rd Ticket</th>
+				<th>店鋪</th>
+				<th>輪候組數</th>
+				<th>派籌狀態</th>
+				<th>下一張籌號</th>
+				<th>下兩張籌號</th>
+				<th>下三張籌號</th>
   			</tr>
 			<?php
 				$sushiroStoreList = "https://sushipass.sushiro.com.hk/api/2.0/info/storelist?latitude=22&longitude=114&numresults=25&region=HK";
@@ -39,6 +40,7 @@
 					echo "<tr>", PHP_EOL;
 					echo "<td>$value->name</td>", PHP_EOL;
 					echo "<td>$value->waitingGroup</td>", PHP_EOL;
+					echo "<td>$value->netTicketStatus</td>", PHP_EOL;
 					
 					$counter = count($array_StoreQueue->mixedQueue);
 
