@@ -34,7 +34,7 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
-		<table>
+		<table class="container">
 			<tr>
 				<th>Store</th>
 				<th>Current Queue Size</th>
