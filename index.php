@@ -81,7 +81,7 @@
 				foreach($storeRequests as $value)
 				{
 					$array_StoreQueue = json_decode($storeRequests[$k]['content']);
-					var_dump(value['content']);
+					var_dump($array_StoreQueue);
 					$counter = count($array_StoreQueue->mixedQueue);
 				}
 				
