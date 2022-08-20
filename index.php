@@ -39,47 +39,32 @@
 					echo "<tr>", PHP_EOL;
 					echo "<td>$value->name</td>", PHP_EOL;
 					echo "<td>$value->waitingGroup</td>", PHP_EOL;
-					echo count($array_StoreQueue->mixedQueue);
-					if (count($array_StoreQueue->mixedQueue) == 3)
+					
+					$counter = count($array_StoreQueue->mixedQueue);
+
+					switch ($counter)
 					{
-						echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-						echo "<td>$array_StoreQueue->mixedQueue[1]</td>", PHP_EOL;
-						echo "<td>$array_StoreQueue->mixedQueue[2]</td>", PHP_EOL;
-					}
-					elseif (count(array_StoreQueue->mixedQueue) == 2)
-					{
-						echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-						echo "<td>$array_StoreQueue->mixedQueue[1]</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					elseif (count(array_StoreQueue->mixedQueue) == 2)
-					{
-						echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					elseif (count(array_StoreQueue->mixedQueue) == 1)
-					{
-						echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
-						echo "<td>NA</td>", PHP_EOL;
+						case 3:
+							echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
+							echo "<td>$array_StoreQueue->mixedQueue[1]</td>", PHP_EOL;
+							echo "<td>$array_StoreQueue->mixedQueue[2]</td>", PHP_EOL;
+							break;
+						case 2:
+							echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
+							echo "<td>$array_StoreQueue->mixedQueue[1]</td>", PHP_EOL;
+							echo "<td>NA</td>", PHP_EOL;
+							break;
+						case 1:
+							echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
+							echo "<td>NA</td>", PHP_EOL;
+							echo "<td>NA</td>", PHP_EOL;
+							break;
+						default:
+							echo "<td>NA</td>", PHP_EOL;
+							echo "<td>NA</td>", PHP_EOL;
+							echo "<td>NA</td>", PHP_EOL;
 					}
 					echo "</tr>", PHP_EOL;					
-				}
-			?>
-
-			
-			
-			<?php
-				foreach ($allStoreQueueStatus as $value) 
-				{
-					
 				}
 			?>
 		</table>
