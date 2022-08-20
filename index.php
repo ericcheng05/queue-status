@@ -31,8 +31,53 @@
 				// Execute
 				$storeList = curl_exec($channel);
 				curl_close($channel);
-
 				$array_StoreList = json_decode($storeList);
+			
+				$urls = array();
+				foreach ($array_StoreList as $value) 
+				{
+					array_push($urls, $sushiroQueuePath.$value->id);
+				}
+				$storeRequests = array();
+				$mh = curl_multi_init();
+				foreach($urls as $k => $url)
+				{
+					$storeRequests[$k] = array();
+					$storeRequests[$k]['url'] = $url;
+					//Create a normal cURL handle for this particular request.
+					$storeRequests[$k]['curl_handle'] = curl_init($url);
+					//Configure the options for this request.
+					curl_setopt($storeRequests[$k]['curl_handle'], CURLOPT_RETURNTRANSFER, true);
+					//Add our normal / single cURL handle to the cURL multi handle.
+					curl_multi_add_handle($mh, $storeRequests[$k]['curl_handle']);
+				}
+
+				//Execute our requests using curl_multi_exec.
+				$stillRunning = false;
+				do
+				{
+					curl_multi_exec($mh, $stillRunning);
+				}
+				while ($stillRunning);
+				//Loop through the requests that we executed.
+				foreach($storeRequests as $k => $request)
+				{
+    					//Remove the handle from the multi handle.
+    					curl_multi_remove_handle($mh, $request['curl_handle']);
+					//Get the response content and the HTTP status code.
+					$requests[$k]['content'] = curl_multi_getcontent($request['curl_handle']);
+					// $requests[$k]['http_code'] = curl_getinfo($request['curl_handle'], CURLINFO_HTTP_CODE);
+					//Close the handle.
+					curl_close($requests[$k]['curl_handle']);
+				}
+				//Close the multi handle.
+				curl_multi_close($mh);
+				//var_dump the $requests array for example purposes.
+				var_dump($requests);
+			
+			
+			/*
+			
 				$array_allStoreQueueStatus = array();
 				foreach ($array_StoreList as $value) 
 				{
@@ -91,6 +136,7 @@
 					
 					echo "</tr>", PHP_EOL;					
 				}
+				*/
 			?>
 		</table>
 	</body>
