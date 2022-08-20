@@ -43,7 +43,7 @@
 					echo "<td>$value->netTicketStatus</td>", PHP_EOL;
 					
 					$counter = count($array_StoreQueue->mixedQueue);
-
+					echo ($array_StoreQueue->mixedQueue)[0];
 					switch ($counter)
 					{
 						case 3:
