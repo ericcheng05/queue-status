@@ -43,6 +43,7 @@
 				foreach($urls as $k => $url)
 				{
 					$storeRequests[$k] = array();
+					
 					$storeRequests[$k]['url'] = $url;
 					//Create a normal cURL handle for this particular request.
 					$storeRequests[$k]['curl_handle'] = curl_init($url);
@@ -79,8 +80,7 @@
 				foreach($storeRequests as $k => $request)
 				{
 					$array_StoreQueue = json_decode($storeRequests[$k]['content']);
-					var_dump($array_StoreQueue);
-					$counter = count($array_StoreQueue->mixedQueue);
+					echo ($array_StoreQueue->mixedQueue)[0], PHP_EOL;
 				}
 				
 			
