@@ -39,6 +39,7 @@
 					echo "<tr>", PHP_EOL;
 					echo "<td>$value->name</td>", PHP_EOL;
 					echo "<td>$value->waitingGroup</td>", PHP_EOL;
+					echo count($array_StoreQueue->mixedQueue);
 					if (count($array_StoreQueue->mixedQueue) == 3)
 					{
 						echo "<td>$array_StoreQueue->mixedQueue[0]</td>", PHP_EOL;
