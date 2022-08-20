@@ -34,9 +34,12 @@
 				$array_StoreList = json_decode($storeList);
 			
 				$urls = array();
+				$array_allStoreQueueStatus = array();
 				foreach ($array_StoreList as $value) 
 				{
 					array_push($urls, $sushiroQueuePath.$value->id);
+					$array_allStoreQueueStatus[$value->id]['url'] = $sushiroQueuePath.$value->id;
+					echo $array_allStoreQueueStatus[$value->id]['url'];
 				}
 				$storeRequests = array();
 				$mh = curl_multi_init();
@@ -131,7 +134,7 @@
 			
 			/*
 			
-				$array_allStoreQueueStatus = array();
+				
 				foreach ($array_StoreList as $value) 
 				{
 					$channel = curl_init();
