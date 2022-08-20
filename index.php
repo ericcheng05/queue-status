@@ -51,6 +51,8 @@
 					//Add our normal / single cURL handle to the cURL multi handle.
 					curl_multi_add_handle($mh, $storeRequests[$k]['curl_handle']);
 				}
+				echo count($urls);
+				echo count($storeRequests);
 
 				//Execute our requests using curl_multi_exec.
 				$stillRunning = false;
