@@ -76,11 +76,13 @@
 				curl_multi_close($mh);
 				//var_dump the $requests array for example purposes.
 				
+				foreach($storeRequests as $k => $request)
+				{
 				foreach($storeRequests as $value)
 				{
-					$array_StoreQueue = json_decode(value['content']);
+					$array_StoreQueue = json_decode($storeRequests[$k]['content']);
 					var_dump(value['content']);
-					// $counter = count($array_StoreQueue->mixedQueue);
+					$counter = count($array_StoreQueue->mixedQueue);
 				}
 				
 			
