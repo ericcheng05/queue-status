@@ -35,14 +35,15 @@
 			
 				$urls = array();
 				$array_allStoreQueueStatus = array();
-				foreach ($array_StoreList as $value) 
+				foreach ($array_StoreList as $key => $value) 
 				{
 					array_push($urls, $sushiroQueuePath.$value->id);
 					
-					$array_allStoreQueueStatus[$value->id]['name'] = $value->name;
-					$array_allStoreQueueStatus[$value->id]['id'] = $value->id;
-					$array_allStoreQueueStatus[$value->id]['waitingGroup'] = $value->waitingGroup;
-					$array_allStoreQueueStatus[$value->id]['url'] = $sushiroQueuePath.$value->id;				
+					$array_allStoreQueueStatus[$key]['name'] = $value->name;
+					$array_allStoreQueueStatus[$key]['id'] = $value->id;
+					$array_allStoreQueueStatus[$key]['waitingGroup'] = $value->waitingGroup;
+					$array_allStoreQueueStatus[$key]['url'] = $sushiroQueuePath.$value->id;
+					echo $key, PHP_EOL;
 				}
 				$storeRequests = array();
 				$mh = curl_multi_init();
