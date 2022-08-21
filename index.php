@@ -38,13 +38,17 @@
 				foreach ($array_StoreList as $value) 
 				{
 					array_push($urls, $sushiroQueuePath.$value->id);
-					$array_allStoreQueueStatus[$value->id]['url'] = $sushiroQueuePath.$value->id;
-					echo $array_allStoreQueueStatus[$value->id]['url'];
+					
+					$array_allStoreQueueStatus[$value->id]['name'] = $value->name;
+					$array_allStoreQueueStatus[$value->id]['id'] = $value->id;
+					$array_allStoreQueueStatus[$value->id]['waitingGroup'] = $value->waitingGroup;
+					$array_allStoreQueueStatus[$value->id]['url'] = $sushiroQueuePath.$value->id;				
 				}
 				$storeRequests = array();
 				$mh = curl_multi_init();
 				foreach($urls as $k => $url)
 				{
+					echo $k;
 					$storeRequests[$k] = array();
 					
 					$storeRequests[$k]['url'] = $url;
@@ -55,8 +59,6 @@
 					//Add our normal / single cURL handle to the cURL multi handle.
 					curl_multi_add_handle($mh, $storeRequests[$k]['curl_handle']);
 				}
-				// echo count($urls);
-				// echo count($storeRequests);
 
 				//Execute our requests using curl_multi_exec.
 				$stillRunning = false;
