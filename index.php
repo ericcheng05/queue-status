@@ -44,7 +44,8 @@
 					$array_allStoreQueueStatus[$key]['name'] = $value->name;
 					$array_allStoreQueueStatus[$key]['id'] = $value->id;
 					$array_allStoreQueueStatus[$key]['waitingGroup'] = $value->waitingGroup;
-					$array_allStoreQueueStatus[$key]['ticketStatus'] = $value->netTicketStatus;
+					$array_allStoreQueueStatus[$key]['storeStatus'] = $value->storeStatus;
+					$array_allStoreQueueStatus[$key]['ticketStatus'] = $value->localTicketingStatus;
 					$array_allStoreQueueStatus[$key]['url'] = $sushiroQueuePath.$value->id;
 					$array_allStoreQueueStatus[$key]['curl_handle'] = curl_init($array_allStoreQueueStatus[$key]['url']);
 					curl_setopt($array_allStoreQueueStatus[$key]['curl_handle'], CURLOPT_RETURNTRANSFER, true);
@@ -78,14 +79,21 @@
 					
 					switch ($value['ticketStatus'])
 					{
-						case "OFFLINE_MANUAL":
+						case "ON":
 							echo "<td>派籌中</td>", PHP_EOL;
 							break;
-						case "OFFLINE_CLOSED":
-							echo "<td>閉店中</td>", PHP_EOL;
+						case "OFF":
+							if ($value['storeStatus'] == "OPEN")
+							{
+								echo "<td>暫停派籌</td>", PHP_EOL;
+							}
+							else
+							{
+								echo "<td>閉店中</td>", PHP_EOL;
+							}
 							break;
 						default:
-							echo "<td>暫停派籌</td>", PHP_EOL;
+							echo "<td>閉店中</td>", PHP_EOL;
 					}
 					
 					$counter = count($array_StoreQueue->mixedQueue);
