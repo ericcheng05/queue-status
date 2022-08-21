@@ -33,32 +33,22 @@
 				curl_close($channel);
 				$array_StoreList = json_decode($storeList);
 			
-				$urls = array();
+				// $urls = array();
 				$array_allStoreQueueStatus = array();
+				$mh = curl_multi_init();
+				
 				foreach ($array_StoreList as $key => $value) 
 				{
-					array_push($urls, $sushiroQueuePath.$value->id);
+					// array_push($urls, $sushiroQueuePath.$value->id);
 					
 					$array_allStoreQueueStatus[$key]['name'] = $value->name;
 					$array_allStoreQueueStatus[$key]['id'] = $value->id;
 					$array_allStoreQueueStatus[$key]['waitingGroup'] = $value->waitingGroup;
+					$array_allStoreQueueStatus[$key]['ticketStatus'] = $value->netTicketStatus;
 					$array_allStoreQueueStatus[$key]['url'] = $sushiroQueuePath.$value->id;
-					echo $key, PHP_EOL;
-				}
-				$storeRequests = array();
-				$mh = curl_multi_init();
-				foreach($urls as $k => $url)
-				{
-					echo $k;
-					$storeRequests[$k] = array();
-					
-					$storeRequests[$k]['url'] = $url;
-					//Create a normal cURL handle for this particular request.
-					$storeRequests[$k]['curl_handle'] = curl_init($url);
-					//Configure the options for this request.
-					curl_setopt($storeRequests[$k]['curl_handle'], CURLOPT_RETURNTRANSFER, true);
-					//Add our normal / single cURL handle to the cURL multi handle.
-					curl_multi_add_handle($mh, $storeRequests[$k]['curl_handle']);
+					$array_allStoreQueueStatus[$key]['curl_handle'] = curl_init($array_allStoreQueueStatus[$key]['url']);
+					curl_setopt($array_allStoreQueueStatus[$key]['curl_handle'], CURLOPT_RETURNTRANSFER, true);
+					curl_multi_add_handle($mh, $array_allStoreQueueStatus[$key]['curl_handle']);
 				}
 
 				//Execute our requests using curl_multi_exec.
@@ -68,134 +58,70 @@
 					curl_multi_exec($mh, $stillRunning);
 				}
 				while ($stillRunning);
-				//Loop through the requests that we executed.
-				foreach($storeRequests as $k => $request)
+				
+				foreach($array_allStoreQueueStatus as $value)
 				{
-    					//Remove the handle from the multi handle.
-    					curl_multi_remove_handle($mh, $request['curl_handle']);
+    				//Remove the handle from the multi handle.
+    				curl_multi_remove_handle($mh, $value['curl_handle']);
 					//Get the response content and the HTTP status code.
-					$storeRequests[$k]['content'] = curl_multi_getcontent($request['curl_handle']);
-					// $requests[$k]['http_code'] = curl_getinfo($request['curl_handle'], CURLINFO_HTTP_CODE);
+					$value['content'] = curl_multi_getcontent($value['curl_handle']);
+					// $value['http_code'] = curl_getinfo($value['curl_handle'], CURLINFO_HTTP_CODE);
 					//Close the handle.
-					curl_close($storeRequests[$k]['curl_handle']);
-				}
+					curl_close($value['curl_handle']);
+					
+					$array_StoreQueue = json_decode($value['content']);
+					echo "<tr>", PHP_EOL;
+					$name = $value['name'];
+					$waitingTicket = $value['waitingGroup'];
+					echo "<td>$name</td>", PHP_EOL;
+					echo "<td>$waitingTicket</td>", PHP_EOL;
+					
+					switch ($value['ticketStatus'])
+					{
+						case "OFFLINE_MANUAL":
+							echo "<td>派籌中</td>", PHP_EOL;
+							break;
+						case "OFFLINE_CLOSED":
+							echo "<td>閉店中</td>", PHP_EOL;
+							break;
+						default:
+							echo "<td>暫停派籌</td>", PHP_EOL;
+					}
+					
+					$counter = count($array_StoreQueue->mixedQueue);
+					if ($counter > 0)
+					{
+						$firstTicket = ($array_StoreQueue->mixedQueue)[0];
+						echo "<td>$firstTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					if ($counter > 1)
+					{
+						$secondTicket = ($array_StoreQueue->mixedQueue)[1];
+						echo "<td>$secondTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					if ($counter > 2)
+					{
+						$thirdTicket = ($array_StoreQueue->mixedQueue)[2];
+						echo "<td>$thirdTicket</td>", PHP_EOL;						
+					}
+					else
+					{
+						echo "<td>NA</td>", PHP_EOL;
+					}
+					
+					echo "</tr>", PHP_EOL;
+				}				
+				
 				//Close the multi handle.
 				curl_multi_close($mh);
-				//var_dump the $requests array for example purposes.
-				
-				foreach($storeRequests as $k => $request)
-				{
-					$array_StoreQueue = json_decode($storeRequests[$k]['content']);
-					echo "<tr>", PHP_EOL;
-					echo "<td>$array_StoreList[$k]['name']</td>", PHP_EOL;
-					echo "<td>$array_StoreList[$k]['waitingGroup']</td>", PHP_EOL;
-					
-					
-					if ($value->counterReservationsAllowed)
-					{
-						echo "<td>暫停派籌</td>", PHP_EOL;
-					}
-					else
-					{
-						echo "<td>派籌中</td>", PHP_EOL;
-					}
-					
-					$counter = count($array_StoreQueue->mixedQueue);
-					if ($counter > 0)
-					{
-						$firstTicket = ($array_StoreQueue->mixedQueue)[0];
-						echo "<td>$firstTicket</td>", PHP_EOL;						
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					if ($counter > 1)
-					{
-						$secondTicket = ($array_StoreQueue->mixedQueue)[1];
-						echo "<td>$secondTicket</td>", PHP_EOL;						
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					if ($counter > 2)
-					{
-						$thirdTicket = ($array_StoreQueue->mixedQueue)[2];
-						echo "<td>$thirdTicket</td>", PHP_EOL;						
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					
-					echo "</tr>", PHP_EOL;	
-
-				}
-				
-			
-			
-			/*
-			
-				
-				foreach ($array_StoreList as $value) 
-				{
-					$channel = curl_init();
-					curl_setopt($channel, CURLOPT_RETURNTRANSFER, true);
-					curl_setopt($channel, CURLOPT_URL,$sushiroQueuePath.$value->id);
-					// Execute
-					$storeQueue = curl_exec($channel);
-					$array_StoreQueue = json_decode($storeQueue);
-					curl_close($channel);
-					
-					echo "<tr>", PHP_EOL;
-					echo "<td>$value->name</td>", PHP_EOL;
-					echo "<td>$value->waitingGroup</td>", PHP_EOL;
-					
-					
-					if ($value->counterReservationsAllowed)
-					{
-						echo "<td>暫停派籌</td>", PHP_EOL;
-					}
-					else
-					{
-						echo "<td>派籌中</td>", PHP_EOL;
-					}
-					
-					
-					
-					$counter = count($array_StoreQueue->mixedQueue);
-					if ($counter > 0)
-					{
-						$firstTicket = ($array_StoreQueue->mixedQueue)[0];
-						echo "<td>$firstTicket</td>", PHP_EOL;						
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					if ($counter > 1)
-					{
-						$secondTicket = ($array_StoreQueue->mixedQueue)[1];
-						echo "<td>$secondTicket</td>", PHP_EOL;						
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					if ($counter > 2)
-					{
-						$thirdTicket = ($array_StoreQueue->mixedQueue)[2];
-						echo "<td>$thirdTicket</td>", PHP_EOL;						
-					}
-					else
-					{
-						echo "<td>NA</td>", PHP_EOL;
-					}
-					
-					echo "</tr>", PHP_EOL;					
-				}
-				*/
 			?>
 		</table>
 	</body>
