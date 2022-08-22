@@ -77,23 +77,23 @@
 					echo "<td>$name</td>", PHP_EOL;
 					echo "<td>$waitingTicket</td>", PHP_EOL;
 					
-					switch ($value['ticketStatus'])
+					switch ($value['storeStatus'])
 					{
-						case "ON":
-							echo "<td>派籌中</td>", PHP_EOL;
-							break;
-						case "OFF":
-							if ($value['storeStatus'] == "OPEN")
+						case "OPEN":
+							if ($value['ticketStatus'] == "ON")
 							{
-								echo "<td>暫停派籌</td>", PHP_EOL;
+								echo "<td>派籌中</td>", PHP_EOL;
 							}
 							else
 							{
-								echo "<td>閉店中</td>", PHP_EOL;
+								echo "<td>暫停派籌</td>", PHP_EOL;
 							}
 							break;
-						default:
+						case "CLOSED":
 							echo "<td>閉店中</td>", PHP_EOL;
+							break;
+						default:
+							echo "<td>閉店中</td>", PHP_EOL;							
 					}
 					
 					$counter = count($array_StoreQueue->mixedQueue);
