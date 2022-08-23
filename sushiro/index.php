@@ -6,12 +6,12 @@
 		<link rel="stylesheet" type="text/css" href="../css/table.css">
 	</head>
 	<body>
-		<h1>Sushiro籌號</h1>
+		<h1>壽司郎籌號</h1>
 		<?php
 			date_default_timezone_set('Asia/Hong_Kong');
 			$time = date('H:i');
-			$date = date('Y-m-d');
-			echo "<h2>Update Time:	$time &#40;$date&#41;</h2>", PHP_EOL;			
+			// $date = date('Y-m-d');
+			echo "<h2>Update Time:	$time</h2>", PHP_EOL;			
 		?>
 		
 		<table class="center rtable">
