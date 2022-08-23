@@ -31,3 +31,14 @@ h2
 	padding-bottom: 2em;
 	color: #00BFFF;
 }
+
+h3
+{
+	font-size:1.2em; 
+	font-weight: 400;
+	text-align: center;
+	display: block;
+	line-height:1em;
+	padding-bottom: 2em;
+	color: #00BFFF;
+}
