@@ -13,7 +13,7 @@
 			echo "<h2>Update Time:	$date</h2>", PHP_EOL;
 		?>
 					
-		<table class="rtable">
+		<table class="center rtable">
 			<tr>
 				<th>店鋪</th>
 				<th>輪候組數</th>
