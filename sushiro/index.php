@@ -12,8 +12,8 @@
 			$date = date('Y-d-m H:i');
 			echo "<h2>Update Time:	$date</h2>", PHP_EOL;
 		?>
-					
-		<table class="center rtable">
+		<div class="center"><p>test</p></div>	
+		<table class="rtable">
 			<tr>
 				<th>店鋪</th>
 				<th>輪候組數</th>
