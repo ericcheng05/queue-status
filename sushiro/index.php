@@ -10,9 +10,8 @@
 		<?php
 			date_default_timezone_set('Asia/Hong_Kong');
 			$time = date('H:i');
-			echo "<h2>Update Time:	$time</h2>", PHP_EOL;
 			$date = date('Y-m-d');
-			echo "<h3>Update Date:	$date</h3>", PHP_EOL;
+			echo "<h2>Update Time:	$time</h2>(<h3>$date</h3>)", PHP_EOL;			
 		?>
 		
 		<table class="center rtable">
