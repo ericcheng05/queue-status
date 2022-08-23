@@ -70,8 +70,10 @@
 // CodePen house keeping
 */
 
-table {
-  margin-bottom: 30px;
+table
+{
+	margin: auto;
+	margin-bottom: 30px;
 }
 
 a {
