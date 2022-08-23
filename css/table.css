@@ -15,7 +15,7 @@
 .rtable
 {
 	display: block;
-	max-width: min-content;	
+	max-width: 100%;	
 	vertical-align: top;
 	overflow-x: auto;
 	
