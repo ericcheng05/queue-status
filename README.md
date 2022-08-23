@@ -1,2 +1,3 @@
 # Queue Status for Hong Kong Locations
-## Sushiro: queue.hlcheng.cf/sushiro
+## Homepage: https://queue.hlcheng.cf
+## Sushiro: https://queue.hlcheng.cf/sushiro
