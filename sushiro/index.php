@@ -2,7 +2,7 @@
 	<head>
 		<title>Sushiro HK Store Queue Status</title>
 		<meta http-equiv="refresh" content="120">
-		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<link rel="stylesheet" type="text/css" href="../css/table.css">
 	</head>
 	<body>
 		<h1>Sushiro籌號</h1>
@@ -12,7 +12,7 @@
 			echo "<h2>Update Time:	$date</h2>", PHP_EOL;
 		?>
 					
-		<table class="container">
+		<table class="rtable">
 			<tr>
 				<th>店鋪</th>
 				<th>輪候組數</th>
