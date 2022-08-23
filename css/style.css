@@ -7,7 +7,7 @@ body
 	font-weight: 400;
 	font-size: 22px;
 	line-height: 1.5em;
-	color:darkslategray;
+	color: #2F4F4F;
 	background-color:lightyellow;
 	padding: 1rem;
 }
@@ -18,7 +18,7 @@ h1
 	font-weight: 700;
 	line-height:1em;
 	text-align: center;
-	color: DodgerBlue;
+	color: #1E90FF;
 }
 
 h2
@@ -29,5 +29,5 @@ h2
 	display: block;
 	line-height:1em;
 	padding-bottom: 2em;
-	color: Crimson;
+	color: #00BFFF;
 }
