@@ -2,6 +2,8 @@
 	<head>
 		<title>Sushiro HK Store Queue Status</title>
 		<meta http-equiv="refresh" content="120">
+		<style>@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');</style>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
 		<link rel="stylesheet" type="text/css" href="../css/table.css">
 	</head>
 	<body>
