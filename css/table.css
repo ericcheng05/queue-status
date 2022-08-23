@@ -14,13 +14,9 @@
 
 .rtable
 {
-	/*!
-	// IE needs inline-block to position scrolling shadows otherwise use:
-	// display: block;
-	// max-width: min-content;
-	*/
+	display: block;
+	max-width: min-content;	
 	vertical-align: top;
-	max-width: 100%;
 	overflow-x: auto;
 	
 	// optional - looks better for small cell values
