@@ -11,7 +11,7 @@
 			date_default_timezone_set('Asia/Hong_Kong');
 			$time = date('H:i');
 			$date = date('Y-m-d');
-			echo "<h2>Update Time:	$time <div style="font-size=2em;">&#40;$date&#41;</div></h2>", PHP_EOL;			
+			echo "<h2>Update Time:	$time &#40;$date&#41;</h2>", PHP_EOL;			
 		?>
 		
 		<table class="center rtable">
